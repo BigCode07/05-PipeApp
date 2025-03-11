@@ -26,13 +26,23 @@
 <div class="divider my-2"></div>
 
 <section class="my-2">
-  <h1 class="text-2xl font-bold">Pipes personalizados en accion</h1>
+  <h1 class="text-2xl font-bold">
+    Filtrando por: ordenando por {{ sortBy() }}
+  </h1>
 
   <div class="flex gap-2 justify-end w-full">
-    <button class="btn btn-primary">Por nombre</button>
-    <button class="btn btn-accent">Por volar</button>
-    <button class="btn btn-secundary">Por color</button>
-    <button class="btn btn-info">Por creador</button>
+    <button (click)="sortBy.set('name')" class="btn btn-primary">
+      Por nombre
+    </button>
+    <button (click)="sortBy.set('canFly')" class="btn btn-accent">
+      Por volar
+    </button>
+    <button (click)="sortBy.set('color')" class="btn btn-secundary">
+      Por color
+    </button>
+    <button (click)="sortBy.set('creator')" class="btn btn-info">
+      Por creador
+    </button>
   </div>
 </section>
 
@@ -49,7 +59,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (hero of heroes(); track hero.id) {
+      @for (hero of heroes() |heroSortBy:sortBy(); track hero.id) {
       <tr>
         <td>{{ hero.id }}</td>
         <td>{{ hero.name }}</td>
@@ -66,11 +76,19 @@
           <span
             class="text-xs w-44"
             [style.color]="hero.color | heroTextColor"
-            >{{ hero.color | heroColor }}</span
+            >{{ hero.color | heroColor | titlecase }}</span
           >
         </td>
-        <td>{{ hero.creator ? "Marvel" : "DC" }}</td>
+        <td>
+          <span
+            [class.text-primary]="hero.creator === 0"
+            [class.text-accent]="hero.creator === 1"
+            >{{ hero.creator | heroCreatorPipe }}</span
+          >
+        </td>
+        <td></td>
       </tr>
+
       }
     </tbody>
   </table>
