@@ -63,9 +63,11 @@
           >
         </td>
         <td>
-          <span class="text-xs w-44" [style.color]="hero.color | heroColor">{{
-            hero.color | heroColor
-          }}</span>
+          <span
+            class="text-xs w-44"
+            [style.color]="hero.color | heroTextColor"
+            >{{ hero.color | heroColor }}</span
+          >
         </td>
         <td>{{ hero.creator ? "Marvel" : "DC" }}</td>
       </tr>

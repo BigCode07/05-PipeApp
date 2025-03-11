@@ -1,10 +1,11 @@
 import { Pipe, type PipeTransform } from '@angular/core';
+import { Color, ColorMap } from '../interfaces/hero.interface';
 
 @Pipe({
   name: 'heroTextColor',
 })
 export class HeroTextColorPipe implements PipeTransform {
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return value;
+  transform(value: Color): string {
+    return ColorMap[value];
   }
 }
